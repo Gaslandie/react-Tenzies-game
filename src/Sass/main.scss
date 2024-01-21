@@ -1,0 +1,45 @@
+@use 'variables';
+@use 'mixins';
+
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    height: 100vh;
+    padding: 0;
+    @include mixins.center-boxes;
+    .container{
+        
+        padding: 20px;
+        @media (min-width:768px) {
+            width:70%;
+        }
+        .boxes{
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            gap: 10px;
+            margin-left: 12px;
+            .box{
+                background-color: #3bd3ad;
+                width: 75%;
+                height: 40px;
+                margin-bottom: 10px;
+                border-radius: 10px;
+                @include mixins.center-boxes;
+                font-size: 25px;
+                box-shadow: 1px 1px 5px;
+                transition: 0.5s ease;
+                &:hover{
+                    cursor: pointer;
+                    font-size:30px ;
+                    background-color: aquamarine;
+                }
+            }
+        }
+        .btn{
+            background-color: #620f87;
+            color: white;
+        }
+    }
+}

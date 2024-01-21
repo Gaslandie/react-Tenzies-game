@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .container {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  body .container {
+    width: 70%;
+  }
+}
+body .container .boxes {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  gap: 10px;
+  margin-left: 12px;
+}
+body .container .boxes .box {
+  background-color: #3bd3ad;
+  width: 75%;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  box-shadow: 1px 1px 5px;
+  transition: 0.5s ease;
+}
+body .container .boxes .box:hover {
+  cursor: pointer;
+  font-size: 30px;
+  background-color: aquamarine;
+}
+body .container .btn {
+  background-color: #620f87;
+  color: white;
+}
+
+/*# sourceMappingURL=main.css.map */
