@@ -11,12 +11,8 @@ body {
   align-items: center;
 }
 body .container {
+  background-color: #9becd8;
   padding: 20px;
-}
-@media (min-width: 768px) {
-  body .container {
-    width: 70%;
-  }
 }
 body .container .boxes {
   display: grid;
@@ -25,8 +21,7 @@ body .container .boxes {
   margin-left: 12px;
 }
 body .container .boxes .box {
-  background-color: #3bd3ad;
-  width: 75%;
+  width: 70%;
   height: 40px;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -35,16 +30,14 @@ body .container .boxes .box {
   align-items: center;
   font-size: 25px;
   box-shadow: 1px 1px 5px;
-  transition: 0.5s ease;
 }
 body .container .boxes .box:hover {
   cursor: pointer;
-  font-size: 30px;
-  background-color: aquamarine;
 }
 body .container .btn {
   background-color: #620f87;
   color: white;
+  width: 120px;
 }
 
 /*# sourceMappingURL=main.css.map */
