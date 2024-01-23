@@ -10,6 +10,10 @@ function App() {
     const [boxesContent,setBoxesContent] = useState(generateNumber()) //pour gerer letat du contenu de nos boxs
     const [tenzies,setTenzies] = useState(false) //lorsque toutes les boxs ont la meme valeur ou pas, gerer cet etat
     const confettiAudio = useRef(new Audio(confettiSound)) //gerer letat de notre audio,qui ne cause pas de rendu
+    const [timeElapsed,setTimeElapsed] = useState(0)
+    const [timerOn,setTimerOn] = useState(false)
+    const [gameStarted,setGameStarted] = useState(false)
+    const [bestTime,setBestTime] = useState(Infinity)
 
     function generateNumber(){ //fonction pour generer 10 nombre entre 0 et 6 comme pour un dé
         const boxNumbers = []
@@ -44,15 +48,22 @@ function App() {
             }))
         }else{
             setTenzies(false)
-            setBoxesContent(generateNumber)
+            setBoxesContent(generateNumber())
+            setGameStarted(false)
+            setTimerOn(false)
+            setTimeElapsed(0)
         }
         
     }
 
     //lorsqu'on clique sur un dé ou une boxe changer son isheld à !isheld
     function holdDice(id){
+        if(!gameStarted){
+            setGameStarted(true);
+            setTimerOn(true);//pour demarrer le chronomètre
+        }
         playSound()
-      setBoxesContent(prevBoxesContent =>prevBoxesContent.map(prevBoxe=>{
+        setBoxesContent(prevBoxesContent =>prevBoxesContent.map(prevBoxe=>{
         return prevBoxe.id === id ? {...prevBoxe,isHeld: !prevBoxe.isHeld} :  prevBoxe
       })) 
     }
@@ -66,7 +77,7 @@ function App() {
                                     />)
 
     //à chaque fois qu'il ya un changement au niveau de l'une de nos boxe, verifier si toutes les valeurs sont les memes et si toutes les
-    //boxes ont pour isheld true,pour pouvoir declarer vainqueur notre joueur
+    //boxes ont pour isheld true,pour pouvoir declarer vainqueur notre joueur.s'il est vainqueur verifier s'il a battu son record ou pas
     useEffect(()=>{
         const allHeld=boxesContent.every(boxe => boxe.isHeld)
         const sameValue=boxesContent[0].value
@@ -74,12 +85,30 @@ function App() {
         if(allHeld && allSameValue){
             setTenzies(true)
             playFireWorkSound()
+            setTimerOn(false)
+            if(timeElapsed < bestTime){
+                setBestTime(timeElapsed)
+                // setTimeElapsed(0)
+            }
         }else{
             stopFireWorkSound()
         }
-    },[boxesContent])
+    },[boxesContent,bestTime,timeElapsed])
 
-    
+    //gestion de letat de notre temps ecoulé en fonction de letat du jeu,si le chrono a demarré ou pas
+    useEffect(()=>{
+        let interval;
+
+        if(timerOn){
+            interval = setInterval(()=>{
+                setTimeElapsed(prevTime => prevTime + 1)
+            },1000)
+        }else if(!timerOn){
+            clearInterval(interval)
+        }
+
+        return ()=>clearInterval(interval)
+    },[timerOn])
 
 
   return (
@@ -91,7 +120,12 @@ function App() {
                 {box}
             </div>
         </div>
-        <button className="btn mt-4" onClick={ newBoxNumbers}>{tenzies?"Nouveau Jeu":"Lancer"}</button>
+        <div className="lancer-record-ecoule mt-4 d-flex justify-content-md-evenly justify-content-between">
+            <span className="time-elapsed ms-2 fw-bold">Temps ecoulé: {timeElapsed}sec</span>
+            <button className="btn" onClick={ newBoxNumbers}>{tenzies?"Nouveau Jeu":"Lancer"}</button>
+            <span className="record me-2 fw-bold">Record: {bestTime === Infinity ?"" : bestTime + "sec"}</span>
+        </div>
+        
     </div>
   );
 }

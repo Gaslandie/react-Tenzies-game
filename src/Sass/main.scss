@@ -36,10 +36,21 @@ body{
                 }
             }
         }
-        .btn{
-            background-color: #620f87;
-            color: white;
-            width: 120px;
+        .lancer-record-ecoule{
+
+            .btn,.record,.time-elapsed{
+                background-color: #620f87;
+                color: white;
+                padding: 10px;
+                // width: 120px;
+            }
+            .record,.time-elapsed{
+                background-color: #25e6b5;
+                border-radius: 10px;
+                color: rgb(46, 28, 5);
+                font-size: 1.2rem;
+                
+            }
         }
     }
 }
