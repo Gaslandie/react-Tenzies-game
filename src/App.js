@@ -136,9 +136,9 @@ function App() {
             </div>
         </div>
         <div className="lancer-record-ecoule mt-4 d-flex justify-content-md-evenly justify-content-between">
-            <span className="time-elapsed ms-2 fw-bold">Temps ecoulé: {timeElapsed}sec</span>
-            <button className="btn" onClick={ newBoxNumbers}>{tenzies?"Nouveau Jeu":"Lancer"}</button>
-            <span className="record me-2 fw-bold">Record: {bestTime === Infinity ?"" : bestTime + "sec"}</span>
+            <span className="time-elapsed ms-2 fw-bold">chrono: {timeElapsed}s</span>
+            <button className="btn" onClick={ newBoxNumbers}>{tenzies?"Jouer":"Lancer"}</button>
+            <span className="record me-2 fw-bold">Record: {bestTime === Infinity ?"" : bestTime + "s"}</span>
         </div>
         
     </div>
