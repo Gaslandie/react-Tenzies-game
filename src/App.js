@@ -15,6 +15,21 @@ function App() {
     const [gameStarted,setGameStarted] = useState(false)
     const [bestTime,setBestTime] = useState(Infinity)
 
+    // Charger le record du LocalStorage
+    useEffect(() => {
+        const savedRecord = localStorage.getItem("recordTenzies");
+        if (savedRecord) {
+            setBestTime(Number(savedRecord));
+        }
+    }, []);
+
+    // Sauvegarder le record dans le LocalStorage
+    useEffect(() => {
+        if (bestTime !== Infinity) {
+            localStorage.setItem("recordTenzies", bestTime.toString());
+        }
+    }, [bestTime]);
+
     function generateNumber(){ //fonction pour generer 10 nombre entre 0 et 6 comme pour un dé
         const boxNumbers = []
         for (let i=0;i<10;i++){
