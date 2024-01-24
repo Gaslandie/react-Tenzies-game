@@ -36,7 +36,7 @@ body .container .boxes .box:hover {
 body .container .lancer-record-ecoule .btn, body .container .lancer-record-ecoule .record, body .container .lancer-record-ecoule .time-elapsed {
   background-color: #620f87;
   color: white;
-  padding: 5px;
+  padding: 8px;
 }
 body .container .lancer-record-ecoule .record, body .container .lancer-record-ecoule .time-elapsed {
   background-color: #25e6b5;
